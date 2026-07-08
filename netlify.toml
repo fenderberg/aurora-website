@@ -1,0 +1,12 @@
+# Netlify-configuratie voor een statische site (alleen HTML + assets)
+[build]
+  publish = "."
+  command = ""
+
+# Nette security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
