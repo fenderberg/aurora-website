@@ -85,7 +85,7 @@ nav .links a.active::after{transform:scaleX(1)}
 }
 .hero::after{
   background:
-    linear-gradient(rgba(13,13,13,.25), rgba(13,13,13,.35) 55%, rgba(13,13,13,.92) 88%, #0D0D0D),
+    linear-gradient(rgba(13,13,13,.15), rgba(13,13,13,.4) 45%, rgba(13,13,13,.62) 75%, rgba(13,13,13,.8) 100%),
     url('assets/hero.jpg') center top / 100% auto no-repeat;
   z-index:1;
 }
@@ -209,6 +209,8 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
   nav .links{width:100%;justify-content:center;gap:8px 18px}
   nav .links a{margin-left:0}
   .hero{padding-top:110px}
+  .hero::before{filter:blur(90px) brightness(.5)}
+  .hero::after{background-size:auto,150% auto}
   .hero-logo{margin-top:24px}
   .album,.band,.podcast{grid-template-columns:1fr}
   .album .art,.band .photo,.podcast .player{border-right:0;border-bottom:1px solid var(--bone)}
