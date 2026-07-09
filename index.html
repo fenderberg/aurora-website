@@ -73,17 +73,25 @@ nav .links a.active{opacity:1}
 nav .links a::after{content:'';position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--bone);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
 nav .links a.active::after{transform:scaleX(1)}
 @media (prefers-reduced-motion:reduce){nav .links a::after{transition:none}}
-@media(max-width:640px){nav .links a{margin-left:14px}}
 
 /* HERO */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:72px 20px 0;border-bottom:1px solid var(--bone);
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:72px 20px 0;border-bottom:1px solid var(--bone)}
+.hero::before,.hero::after{content:'';position:absolute;inset:0}
+.hero::before{
+  background:url('assets/hero.jpg') center 30% / cover no-repeat;
+  filter:blur(60px) brightness(.55);
+  transform:scale(1.15);
+  z-index:0;
+}
+.hero::after{
   background:
-    linear-gradient(rgba(13,13,13,.3), rgba(13,13,13,.4) 55%, rgba(13,13,13,.92) 88%, #0D0D0D),
-    url('assets/hero.jpg') center 30% / cover no-repeat;
-  background-attachment:fixed,fixed}
+    linear-gradient(rgba(13,13,13,.25), rgba(13,13,13,.35) 55%, rgba(13,13,13,.92) 88%, #0D0D0D),
+    url('assets/hero.jpg') center top / 100% auto no-repeat;
+  z-index:1;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero-logo{width:min(620px,86vw);max-height:44svh;object-fit:contain;object-position:center top;height:auto;filter:none;will-change:transform,opacity;align-self:center}
-.hero .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0;border-top:1px solid var(--bone);margin-top:48px;color:var(--dim)}
+.hero-logo{position:relative;z-index:2;width:min(620px,86vw);max-height:44svh;object-fit:contain;object-position:center top;height:auto;filter:none;will-change:transform,opacity;align-self:center}
+.hero .meta{position:relative;z-index:2;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0;border-top:1px solid var(--bone);margin-top:48px;color:var(--dim)}
 .hero .meta b{color:var(--bone);font-weight:400}
 
 /* SCROLL REVEALS */
@@ -92,7 +100,6 @@ nav .links a.active::after{transform:scaleX(1)}
 .reveal.d1{transition-delay:.1s}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
-  .hero{background-attachment:scroll,scroll}
   .marquee .track,.endmark img{animation:none}
 }
 
@@ -197,14 +204,11 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
 .endmark img{height:26px;width:auto;filter:none;opacity:.9;animation:spin 45s linear infinite}
 
 @media(max-width:820px){
-  .hero{
-    min-height:auto;
-    padding-top:96px;
-    background:
-      linear-gradient(rgba(13,13,13,.3), rgba(13,13,13,.4) 55%, rgba(13,13,13,.92) 88%, #0D0D0D),
-      url('assets/hero.jpg') center top / 100% auto no-repeat;
-    background-attachment:scroll,scroll;
-  }
+  nav{height:auto;padding:14px 20px}
+  nav .brand{display:none}
+  nav .links{width:100%;justify-content:center;gap:8px 18px}
+  nav .links a{margin-left:0}
+  .hero{padding-top:110px}
   .hero-logo{margin-top:24px}
   .album,.band,.podcast{grid-template-columns:1fr}
   .album .art,.band .photo,.podcast .player{border-right:0;border-bottom:1px solid var(--bone)}
