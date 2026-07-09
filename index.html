@@ -75,22 +75,30 @@ nav .links a.active::after{transform:scaleX(1)}
 @media (prefers-reduced-motion:reduce){nav .links a::after{transition:none}}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:72px 20px 0;border-bottom:1px solid var(--bone)}
-.hero::before,.hero::after{content:'';position:absolute;inset:0}
-.hero::before{
-  background:url('assets/hero.jpg') center 30% / cover no-repeat;
-  filter:blur(60px) brightness(.55);
-  transform:scale(1.15);
-  z-index:0;
-}
-.hero::after{
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;padding:72px 20px 0;border-bottom:1px solid var(--bone);
   background:
     linear-gradient(rgba(13,13,13,.15), rgba(13,13,13,.4) 45%, rgba(13,13,13,.62) 75%, rgba(13,13,13,.8) 100%),
-    url('assets/hero.jpg') center top / 100% auto no-repeat;
-  z-index:1;
+    url('assets/hero.jpg') center 30% / cover no-repeat;
+}
+@media (orientation:portrait){
+  .hero{
+    background:
+      linear-gradient(rgba(13,13,13,.4), rgba(13,13,13,.6) 45%, rgba(13,13,13,.8) 75%, rgba(13,13,13,.92) 100%),
+      url('assets/hero-bg-circle.jpg') center / cover no-repeat;
+  }
+  .hero-dots{display:none}
+}
+.hero-dots{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:radial-gradient(circle, var(--bone) 1px, transparent 1.4px);
+  background-size:7px 7px;
+  mix-blend-mode:soft-light;
+  opacity:.55;
+  mask-image:radial-gradient(circle at 50% 42%, #000 0%, #000 22%, transparent 66%);
+  -webkit-mask-image:radial-gradient(circle at 50% 42%, #000 0%, #000 22%, transparent 66%);
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero-logo{position:relative;z-index:2;width:min(620px,86vw);max-height:44svh;object-fit:contain;object-position:center top;height:auto;filter:none;will-change:transform,opacity;align-self:center}
+.hero-logo{position:relative;z-index:2;width:min(620px,86vw);max-height:44svh;object-fit:contain;object-position:center top;height:auto;filter:none;will-change:transform,opacity;align-self:center;margin:auto 0}
 .hero .meta{position:relative;z-index:2;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0;border-top:1px solid var(--bone);margin-top:48px;color:var(--dim)}
 .hero .meta b{color:var(--bone);font-weight:400}
 
@@ -209,9 +217,6 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
   nav .links{width:100%;justify-content:center;gap:8px 18px}
   nav .links a{margin-left:0}
   .hero{padding-top:110px}
-  .hero::before{filter:blur(90px) brightness(.5)}
-  .hero::after{background-size:auto,150% auto}
-  .hero-logo{margin-top:24px}
   .album,.band,.podcast{grid-template-columns:1fr}
   .album .art,.band .photo,.podcast .player{border-right:0;border-bottom:1px solid var(--bone)}
   .watchgrid{grid-template-columns:1fr}
@@ -234,6 +239,7 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
 </nav>
 
 <header class="hero">
+  <div class="hero-dots" aria-hidden="true"></div>
   <img class="hero-logo" src="assets/logo_bone_hd.png" alt="The Aurora Project" fetchpriority="high">
   <div>
     <div class="meta mono">
