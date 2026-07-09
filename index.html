@@ -81,7 +81,6 @@ nav .links a:hover{text-decoration:underline;text-underline-offset:4px}
 .hero-logo{width:min(620px,86vw);max-height:44svh;object-fit:contain;object-position:center top;height:auto;filter:none;will-change:transform,opacity;align-self:center}
 .hero .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0;border-top:1px solid var(--bone);margin-top:48px;color:var(--dim)}
 .hero .meta b{color:var(--bone);font-weight:400}
-.hero-credit{align-self:flex-end;color:rgba(237,234,226,.35);padding-bottom:6px}
 
 /* SCROLL REVEALS */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
@@ -174,7 +173,7 @@ section{border-bottom:1px solid var(--bone)}
 .disco a:hover .cap span{color:var(--ink)}
 
 /* BAND */
-.band{display:grid;grid-template-columns:1fr 1fr}
+.band{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bone)}
 .band .photo{border-right:1px solid var(--bone)}
 .band .photo img{width:100%;height:100%;object-fit:cover}
 .band ul{padding:20px}
@@ -220,7 +219,7 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
 <nav>
   <span class="mono brand"><b>THE AURORA PROJECT</b></span>
   <span class="mono links">
-    <a href="#album">Album</a><a href="#live">Live</a><a href="#podcast">Podcast</a><a href="#watch">Watch</a><a href="#discography">Discography</a><a href="#band">Band</a><a href="#contact">Contact</a>
+    <a href="#evos12">EVOS12</a><a href="#live">Live</a><a href="#watch">Watch</a><a href="#band">Band</a><a href="#contact">Contact</a>
   </span>
 </nav>
 
@@ -233,7 +232,6 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
       <span>Label <b>FREIA Music</b></span>
       <span>Latest <b>EVOS12 (2025)</b></span>
     </div>
-    <div class="hero-credit mono" style="text-align:right;padding-bottom:8px">Photo: Bert Treep</div>
   </div>
 </header>
 
@@ -242,22 +240,35 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
   <span class="mono">CD + Digital — FREIA Music</span>
 </div>
 
-<section class="album" id="album">
-  <div class="art reveal">
-    <img src="assets/cover.jpg" alt="EVOS12 album cover" width="1000" height="1000">
-  </div>
-  <div class="info reveal d1">
-    <h2>EVOS12</h2>
-    <p class="mono sub">Part 1 of 2 — Released 21.02.2025</p>
-    <p class="story">After the Dronewars, humanity gathered in massive cities — and lost its sense of purpose. The new world's leaders seized control. <b>Nigel Light</b> struggled to survive in the ruins of a city that once valued dreams, freedom and equality. Far away, on the moon <b>Welda</b>, a young genius made a discovery with the potential to save his world. If only Earth could learn from Welda…</p>
-    <div class="tracks-embed">
-      <iframe src="https://open.spotify.com/embed/album/5BluzKJW1G2D4Moukipcdt?theme=0" title="EVOS12 on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<section id="evos12">
+  <div class="album">
+    <div class="art reveal">
+      <img src="assets/cover.jpg" alt="EVOS12 album cover" width="1000" height="1000">
     </div>
-    <div class="btnrow">
-      <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener">Bandcamp</a>
-      <a href="https://music.apple.com/us/album/evos12/1796742635" target="_blank" rel="noopener">Apple Music</a>
-      <a href="https://store.dutchmusicworks.com/page/the-aurora-project-evos12" target="_blank" rel="noopener">Buy CD</a>
+    <div class="info reveal d1">
+      <h2>EVOS12</h2>
+      <p class="mono sub">Part 1 of 2 — Released 21.02.2025</p>
+      <p class="story">After the Dronewars, humanity gathered in massive cities — and lost its sense of purpose. The new world's leaders seized control. <b>Nigel Light</b> struggled to survive in the ruins of a city that once valued dreams, freedom and equality. Far away, on the moon <b>Welda</b>, a young genius made a discovery with the potential to save his world. If only Earth could learn from Welda…</p>
+      <div class="tracks-embed">
+        <iframe src="https://open.spotify.com/embed/album/5BluzKJW1G2D4Moukipcdt?theme=0" title="EVOS12 on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+      <div class="btnrow">
+        <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener">Bandcamp</a>
+        <a href="https://music.apple.com/us/album/evos12/1796742635" target="_blank" rel="noopener">Apple Music</a>
+        <a href="https://store.dutchmusicworks.com/page/the-aurora-project-evos12" target="_blank" rel="noopener">Buy CD</a>
+      </div>
+    </div>
+  </div>
+  <div class="podcast">
+    <div class="player reveal">
+      <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PL3hp-utvZckG_71f4OzdyvTOyf6pUn29i" title="EVOS 13 — a fictional podcast" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="txt reveal d1">
+      <h2>EVOS 13</h2>
+      <p class="sub">A fictional podcast — the story continues between the albums</p>
+      <blockquote>"I am trying to survive in this environment. My name is Nigel, my friends call me <b>Nigel Light</b>. I live in the remains of a city where once you could live your dreams, and where freedom and equality were highly valued. But that time is long gone. I am living an average life, trying not to stand out of the crowd too much… but I have the feeling that this is about to change…"</blockquote>
+      <p class="more"><a href="https://www.youtube.com/watch?v=_qwjRFP1Qs4&list=PL3hp-utvZckG_71f4OzdyvTOyf6pUn29i" target="_blank" rel="noopener">All episodes on YouTube</a></p>
     </div>
   </div>
 </section>
@@ -282,18 +293,6 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
   </div>
 </section>
 
-<section class="podcast" id="podcast">
-  <div class="player reveal">
-    <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PL3hp-utvZckG_71f4OzdyvTOyf6pUn29i" title="EVOS 13 — a fictional podcast" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  <div class="txt reveal d1">
-    <h2>EVOS 13</h2>
-    <p class="sub">A fictional podcast — the story continues between the albums</p>
-    <blockquote>"I am trying to survive in this environment. My name is Nigel, my friends call me <b>Nigel Light</b>. I live in the remains of a city where once you could live your dreams, and where freedom and equality were highly valued. But that time is long gone. I am living an average life, trying not to stand out of the crowd too much… but I have the feeling that this is about to change…"</blockquote>
-    <p class="more"><a href="https://www.youtube.com/watch?v=_qwjRFP1Qs4&list=PL3hp-utvZckG_71f4OzdyvTOyf6pUn29i" target="_blank" rel="noopener">All episodes on YouTube</a></p>
-  </div>
-</section>
-
 <section id="watch">
   <div class="sec-head"><h3>Watch</h3><span class="mono">YouTube</span></div>
   <div class="watchgrid">
@@ -308,29 +307,28 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
   </div>
 </section>
 
-<section id="discography">
-  <div class="sec-head"><h3>Discography</h3><span class="mono">Five albums deep</span></div>
+<section id="band">
+  <div class="sec-head"><h3>Band</h3><span class="mono">Since 1998</span></div>
+  <div class="band">
+    <div class="photo reveal"><img src="assets/band.jpg" alt="The Aurora Project" loading="lazy"></div>
+    <div class="reveal d1">
+      <ul>
+        <li>Dennis Binnekade <span>Lead vocals</span></li>
+        <li>Remco van den Berg <span>Guitar / vocals</span></li>
+        <li>Alex Ouwehand <span>Guitar / vocals</span></li>
+        <li>Marcel 'Mox' Guijt <span>Keyboards</span></li>
+        <li>Rob Krijgsman <span>Bass</span></li>
+        <li>Joris Bol <span>Drums</span></li>
+      </ul>
+      <p class="about">Dutch progressive rock from Katwijk, formed in <b>1998</b>. Expansive concept albums built from intensive jam sessions — shaped by <b>Rush</b>, <b>Pink Floyd</b> and <b>The Gathering</b>. Played <b>ProgPower Europe</b>; shared stages with <b>Riverside</b> and <b>Threshold</b>.</p>
+    </div>
+  </div>
   <div class="disco reveal">
     <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener"><img src="assets/cover.jpg" alt="EVOS12" loading="lazy"><span class="cap">EVOS12 <span>2025</span></span></a>
     <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="assets/alb-worldofgrey.jpg" alt="World of Grey" loading="lazy"><span class="cap">World of Grey <span>2016</span></span></a>
     <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="assets/alb-selling.jpg" alt="Selling the Aggression" loading="lazy"><span class="cap">Selling the Aggression <span>2013</span></span></a>
     <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="assets/alb-shadow.jpg" alt="Shadow Border" loading="lazy"><span class="cap">Shadow Border <span>2009</span></span></a>
     <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="assets/alb-unspoken.jpg" alt="Unspoken Words" loading="lazy"><span class="cap">Unspoken Words <span>2005</span></span></a>
-  </div>
-</section>
-
-<section class="band" id="band">
-  <div class="photo reveal"><img src="assets/band.jpg" alt="The Aurora Project — photo Bert Treep" loading="lazy"></div>
-  <div class="reveal d1">
-    <ul>
-      <li>Dennis Binnekade <span>Lead vocals</span></li>
-      <li>Remco van den Berg <span>Guitar / vocals</span></li>
-      <li>Alex Ouwehand <span>Guitar / vocals</span></li>
-      <li>Marcel 'Mox' Guijt <span>Keyboards</span></li>
-      <li>Rob Krijgsman <span>Bass</span></li>
-      <li>Joris Bol <span>Drums</span></li>
-    </ul>
-    <p class="about">Dutch progressive rock from Katwijk, formed in <b>1998</b>. Expansive concept albums built from intensive jam sessions — shaped by <b>Rush</b>, <b>Pink Floyd</b> and <b>The Gathering</b>. Played <b>ProgPower Europe</b>; shared stages with <b>Riverside</b> and <b>Threshold</b>. Photo: Bert Treep.</p>
   </div>
 </section>
 
@@ -351,14 +349,14 @@ footer a:hover{text-decoration:underline;text-underline-offset:4px}
       <a href="https://www.youtube.com/@TheAuroraProject" target="_blank" rel="noopener">YouTube</a>
     </div>
     <div>
-      <h4>Press</h4>
-      <a href="https://www.progarchives.com/album.asp?id=87951" target="_blank" rel="noopener">ProgArchives</a>
-      <a href="https://www.progradio.com/reviews/evos12" target="_blank" rel="noopener">Prog Radio ★4.5</a>
-      <a href="https://www.backgroundmagazine.nl/CDreviews/TheAuroraProjectEvos12.html" target="_blank" rel="noopener">Background Magazine</a>
+      <h4>Info</h4>
+      <a href="assets/technical-rider.pdf" target="_blank" rel="noopener">Technical rider</a>
+      <a href="assets/epk.pdf" target="_blank" rel="noopener">EPK</a>
     </div>
     <div>
       <h4>Contact</h4>
       <a href="mailto:contact.theauroraproject@gmail.com">Booking & contact</a>
+      <a href="https://wa.me/31624203948" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://linktr.ee/the_aurora_project" target="_blank" rel="noopener">Linktree</a>
     </div>
   </div>
