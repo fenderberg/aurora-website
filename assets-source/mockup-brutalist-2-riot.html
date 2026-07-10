@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Aurora Project — RIOT</title>
+<link rel="icon" href="huisstijl-assets/avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOCKUP 2 — RIOT  (ref: Yungblud)
+   Poster-wall brutalisme. Dikke randen, stickers, chaos met opzet.
+   ============================================================ */
+:root{
+  --ink:#0D0D0D; --bone:#EDEAE2; --ember:#C96F3F;
+  --black:'Archivo Black',sans-serif;
+  --grot:'Space Grotesk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--ember);color:var(--ink)}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--ink);font-family:var(--grot);font-size:16px;line-height:1.5;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--black);text-transform:uppercase;line-height:.92}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:60;background:var(--ink);color:var(--bone);border-bottom:4px solid var(--ink);display:flex;align-items:center;gap:20px;padding:0 16px;height:58px}
+nav img{height:32px}
+nav .links{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav .links a{font-family:var(--black);font-size:12px;text-transform:uppercase;padding:8px 12px;border:2px solid transparent}
+nav .links a:hover{background:var(--ember);color:var(--ink)}
+
+/* MARQUEE */
+.marquee{background:var(--ember);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);overflow:hidden;white-space:nowrap;padding:10px 0}
+.marquee .track{display:inline-block;animation:slide 18s linear infinite;font-family:var(--black);font-size:20px;text-transform:uppercase}
+.marquee span{margin-right:40px}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{position:relative;padding:120px 16px 60px;background:var(--ink) url('huisstijl-assets/tex_aurora.png') center/cover;background-blend-mode:multiply}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(13,13,13,.55)}
+.hero .inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero h1{color:var(--bone);font-size:clamp(48px,8vw,110px);text-shadow:6px 6px 0 var(--ember)}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--bone)}
+.hero p{color:var(--bone);margin-top:22px;max-width:420px;font-weight:700}
+.hero .art{position:relative;transform:rotate(3deg)}
+.hero .art img{border:5px solid var(--bone);box-shadow:14px 14px 0 var(--ember)}
+.sticker{position:absolute;z-index:3;font-family:var(--black);text-transform:uppercase;background:var(--bone);color:var(--ink);border:4px solid var(--ink);padding:12px 18px;box-shadow:6px 6px 0 var(--ink)}
+.sticker.out{top:-22px;right:-14px;background:var(--ember);transform:rotate(8deg);font-size:18px}
+.sticker.rating{bottom:-20px;left:-18px;transform:rotate(-5deg);font-size:13px}
+.btn{display:inline-block;font-family:var(--black);text-transform:uppercase;font-size:15px;background:var(--ember);color:var(--ink);border:4px solid var(--bone);padding:16px 28px;margin-top:28px;box-shadow:8px 8px 0 var(--bone);transition:transform .1s}
+.btn:hover{transform:translate(4px,4px);box-shadow:4px 4px 0 var(--bone)}
+
+/* SECTIES */
+section{padding:80px 16px;max-width:1200px;margin:0 auto}
+.headline{display:flex;align-items:center;gap:18px;margin-bottom:40px}
+.headline h2{font-size:clamp(34px,5vw,64px)}
+.headline .tag{font-family:var(--black);font-size:12px;background:var(--ink);color:var(--bone);padding:6px 12px;transform:rotate(-3deg)}
+
+/* TRACKS als posterstroken */
+.trackwall{display:flex;flex-direction:column;gap:14px}
+.trackwall a{display:flex;justify-content:space-between;align-items:center;gap:14px;font-family:var(--black);text-transform:uppercase;font-size:clamp(18px,3.4vw,34px);background:var(--bone);border:4px solid var(--ink);padding:18px 22px;box-shadow:8px 8px 0 var(--ink);transition:transform .1s}
+.trackwall a:nth-child(odd){transform:rotate(-.7deg)}
+.trackwall a:nth-child(even){transform:rotate(.7deg)}
+.trackwall a:hover{background:var(--ember);transform:rotate(0) translate(3px,3px);box-shadow:4px 4px 0 var(--ink)}
+.trackwall .t{font-family:var(--grot);font-weight:700;font-size:14px;background:var(--ink);color:var(--bone);padding:4px 10px;white-space:nowrap}
+
+/* DISCO-collage */
+.disco{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+.disco a{border:4px solid var(--ink);background:var(--bone);box-shadow:10px 10px 0 var(--ink);transition:transform .12s}
+.disco a:nth-child(1){transform:rotate(-2deg)}
+.disco a:nth-child(2){transform:rotate(1.5deg)}
+.disco a:nth-child(3){transform:rotate(-1deg)}
+.disco a:nth-child(4){transform:rotate(2deg)}
+.disco a:nth-child(5){transform:rotate(-1.5deg)}
+.disco a:hover{transform:rotate(0) scale(1.03)}
+.disco .cap{font-family:var(--black);text-transform:uppercase;font-size:13px;padding:10px 12px;border-top:4px solid var(--ink);display:flex;justify-content:space-between;gap:8px}
+.disco .cap span{color:var(--ember)}
+
+/* BAND */
+.bandsec{background:var(--ink);color:var(--bone);max-width:none;padding:80px 16px}
+.bandsec .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.bandsec img{border:5px solid var(--bone);box-shadow:-14px 14px 0 var(--ember);transform:rotate(-2deg)}
+.bandsec h2{font-size:clamp(34px,5vw,58px);color:var(--bone)}
+.bandsec h2 em{font-style:normal;color:var(--ember)}
+.members{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.members span{font-family:var(--black);font-size:12px;text-transform:uppercase;border:3px solid var(--bone);padding:8px 12px}
+.members span:hover{background:var(--ember);color:var(--ink);border-color:var(--ember)}
+.bandsec p{margin-top:24px;font-weight:400;opacity:.85;max-width:480px}
+
+/* FOOTER */
+footer{background:var(--ember);border-top:4px solid var(--ink);padding:60px 16px 30px}
+footer .inner{max-width:1200px;margin:0 auto}
+footer h2{font-size:clamp(40px,8vw,96px);word-break:break-word}
+footer .socials{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 50px}
+footer .socials a{font-family:var(--black);font-size:13px;text-transform:uppercase;background:var(--bone);border:4px solid var(--ink);padding:12px 18px;box-shadow:6px 6px 0 var(--ink)}
+footer .socials a:hover{background:var(--ink);color:var(--bone);transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+footer small{font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+
+@media(max-width:820px){
+  .hero .inner,.bandsec .inner{grid-template-columns:1fr}
+  .hero .art{max-width:420px;margin:0 auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="huisstijl-assets/logo_bone.png" alt="The Aurora Project">
+  <div class="links">
+    <a href="#album">Album</a><a href="#disco">Discography</a><a href="#band">Band</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="inner">
+    <div>
+      <h1>EVOS<em>12</em><br>Out&nbsp;Now</h1>
+      <p>Part 1 of a two-part concept. After the Dronewars, humanity lost its sense of purpose. Nigel Light didn't.</p>
+      <a class="btn" href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener">Listen / Buy →</a>
+    </div>
+    <div class="art">
+      <span class="sticker out">Out now!</span>
+      <img src="site-assets/cover.jpg" alt="EVOS12 album cover">
+      <span class="sticker rating">★★★★½ Prog Radio</span>
+    </div>
+  </div>
+</header>
+
+<div class="marquee"><div class="track">
+  <span>EVOS12 — Out now</span><span>★</span><span>Progressive rock from Katwijk NL</span><span>★</span><span>FREIA Music</span><span>★</span><span>EVOS12 — Out now</span><span>★</span><span>Progressive rock from Katwijk NL</span><span>★</span><span>FREIA Music</span><span>★</span>
+</div></div>
+
+<section id="album">
+  <div class="headline"><h2>The Tracks</h2><span class="tag">38 min of story</span></div>
+  <div class="trackwall">
+    <a href="https://www.youtube.com/watch?v=GhDH3aKxhG0" target="_blank" rel="noopener">01 — Slave City <span class="t">6:26 · video ▶</span></a>
+    <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">02 — The Movement <span class="t">5:41</span></a>
+    <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">03 — Have Some Tea <span class="t">11:36</span></a>
+    <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">04 — The Traveller <span class="t">5:46</span></a>
+    <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">05 — Freedom of Thought <span class="t">9:09</span></a>
+  </div>
+</section>
+
+<section id="disco">
+  <div class="headline"><h2>Five Albums Deep</h2><span class="tag">since 2005</span></div>
+  <div class="disco">
+    <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener"><img src="site-assets/cover.jpg" alt="EVOS12"><span class="cap">EVOS12 <span>2025</span></span></a>
+    <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="site-assets/alb-worldofgrey.jpg" alt="World of Grey"><span class="cap">World of Grey <span>2016</span></span></a>
+    <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="site-assets/alb-selling.jpg" alt="Selling the Aggression"><span class="cap">Selling the Aggression <span>2013</span></span></a>
+    <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="site-assets/alb-shadow.jpg" alt="Shadow Border"><span class="cap">Shadow Border <span>2009</span></span></a>
+    <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener"><img src="site-assets/alb-unspoken.jpg" alt="Unspoken Words"><span class="cap">Unspoken Words <span>2005</span></span></a>
+  </div>
+</section>
+
+<section class="bandsec" id="band">
+  <div class="inner">
+    <img src="site-assets/band.jpg" alt="The Aurora Project — photo Bert Treep">
+    <div>
+      <h2>Six heads,<br>one <em>concept</em></h2>
+      <div class="members">
+        <span>Dennis — vocals</span><span>Remco — guitar</span><span>Alex — guitar</span><span>Mox — keys</span><span>Rob — bass</span><span>Joris — drums</span>
+      </div>
+      <p>Progressive rock from Katwijk since 1998. Born from a shared love of Magic: The Gathering, Rush and Pink Floyd. Concept albums built in the jam room, played loud on stages like ProgPower Europe — alongside Riverside and Threshold. Photo: Bert Treep.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><div class="track">
+  <span>Slave City — official video on YouTube</span><span>★</span><span>25 Years Live — full show online</span><span>★</span><span>Slave City — official video on YouTube</span><span>★</span><span>25 Years Live — full show online</span><span>★</span>
+</div></div>
+
+<footer id="contact">
+  <div class="inner">
+    <h2>Come find us</h2>
+    <div class="socials">
+      <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a>
+      <a href="https://music.apple.com/us/artist/the-aurora-project/311309911" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://www.youtube.com/@TheAuroraProject" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/theauroraproject_band/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/theauroraproject" target="_blank" rel="noopener">Facebook</a>
+      <a href="mailto:info@theauroraproject.com">Booking</a>
+    </div>
+    <small>© 2026 The Aurora Project · Katwijk NL · FREIA Music</small>
+  </div>
+</footer>
+
+</body>
+</html>

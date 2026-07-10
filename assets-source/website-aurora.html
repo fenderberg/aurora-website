@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Aurora Project — EVOS12 out now</title>
+<meta name="description" content="The Aurora Project is a Dutch progressive rock band from Katwijk. The new album EVOS12 is out now on all platforms.">
+<link rel="icon" href="huisstijl-assets/avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Archivo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===================================================================
+   THE AURORA PROJECT — v2, fotografie-gedreven
+   Ink #0D0D0D · Bone #EDEAE2 · Ember #C96F3F
+   =================================================================== */
+:root {
+  --ink:#0D0D0D;
+  --bone:#EDEAE2;
+  --dim:#9d9b94;
+  --ember:#C96F3F;
+  --line:rgba(237,234,226,0.12);
+  --head:'Oswald','Arial Narrow',sans-serif;
+  --body:'Archivo',Arial,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--ink); color:var(--bone); font-family:var(--body); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+img { max-width:100%; display:block; }
+a { color:var(--ember); text-decoration:none; }
+a:hover { text-decoration:underline; text-underline-offset:3px; }
+.wrap { max-width:1160px; margin:0 auto; padding:0 28px; }
+.kicker { font-family:var(--head); font-weight:300; font-size:13px; letter-spacing:5px; text-transform:uppercase; color:var(--ember); margin-bottom:12px; }
+h2 { font-family:var(--head); font-weight:700; font-size:clamp(28px,4vw,40px); text-transform:uppercase; letter-spacing:1px; line-height:1.1; margin-bottom:26px; }
+.lead { color:var(--dim); max-width:620px; }
+
+/* ---------- NAV — altijd dekkend, logo altijd vrij ---------- */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(13,13,13,.92); backdrop-filter:blur(8px); border-bottom:1px solid rgba(237,234,226,0.07); }
+.navbar { max-width:1400px; margin:0 auto; padding:0 28px; height:72px; display:flex; align-items:center; gap:28px; }
+.navbar .brand img { height:34px; width:34px; transition:transform .4s; }
+.navbar .brand:hover img { transform:rotate(30deg); }
+.navlinks { display:flex; gap:28px; margin-left:auto; }
+.navsocial { display:flex; gap:16px; align-items:center; }
+.navsocial a { display:flex; color:var(--dim); }
+.navsocial a:hover { color:var(--ember); }
+.navsocial svg { width:17px; height:17px; fill:currentColor; }
+.navlinks a { font-family:var(--head); font-weight:300; font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); }
+.navlinks a:hover { color:var(--bone); text-decoration:none; }
+.nav-cta { font-family:var(--head); font-weight:500; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--ember); border:1px solid var(--ember); padding:9px 18px; white-space:nowrap; }
+.nav-cta:hover { background:var(--ember); color:var(--ink); text-decoration:none; }
+.navtoggle { display:none; background:none; border:0; color:var(--bone); font-family:var(--head); font-weight:300; font-size:13px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-left:auto; }
+
+/* ---------- HERO — full-bleed bandfoto ---------- */
+.hero { position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; background:url('site-assets/hero.jpg') center 30% / cover no-repeat; }
+.hero-shade { position:absolute; inset:0; background:
+  linear-gradient(rgba(13,13,13,.6), rgba(13,13,13,.15) 28%, rgba(13,13,13,.35) 48%, rgba(13,13,13,.85) 72%, rgba(13,13,13,.97) 90%, var(--ink)); }
+.hero-logoshade { position:absolute; left:0; right:0; bottom:0; height:72%; background:
+  radial-gradient(ellipse 60% 55% at 24% 68%, rgba(13,13,13,.75), rgba(13,13,13,0) 70%); }
+.hero-inner { position:relative; width:100%; max-width:1160px; margin:0 auto; padding:0 28px 8vh; }
+.hero-logo { width:min(460px,72vw); margin-bottom:44px; filter:drop-shadow(0 4px 30px rgba(0,0,0,.55)); }
+.hero-kicker { font-family:var(--head); font-weight:300; font-size:14px; letter-spacing:5px; text-transform:uppercase; color:var(--bone); opacity:.85; margin-bottom:8px; }
+.hero-title { font-family:var(--head); font-weight:700; font-size:clamp(44px,7vw,84px); text-transform:uppercase; line-height:.95; letter-spacing:2px; }
+.hero-sub { margin-top:14px; color:var(--dim); max-width:480px; }
+.cta-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:32px; }
+.btn { display:inline-block; font-family:var(--head); font-weight:500; font-size:14px; letter-spacing:3px; text-transform:uppercase; padding:15px 30px; border:1px solid var(--bone); color:var(--bone); transition:all .2s; }
+.btn:hover { background:var(--bone); color:var(--ink); text-decoration:none; }
+.btn.ember { border-color:var(--ember); background:var(--ember); color:var(--ink); }
+.btn.ember:hover { background:transparent; color:var(--ember); }
+.hero-credit { position:absolute; bottom:14px; right:20px; font-family:var(--head); font-weight:300; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(237,234,226,.4); }
+
+/* aurora-accent: dun lijntje, meer niet */
+.aurora-line { height:5px; background:url('huisstijl-assets/tex_aurora.png') center / cover; }
+
+/* ---------- SECTIES ---------- */
+section { padding:110px 0; }
+section + section { border-top:1px solid var(--line); }
+
+/* ---------- ALBUM ---------- */
+.album-grid { display:grid; grid-template-columns:minmax(0,460px) 1fr; gap:64px; align-items:center; }
+.cover { box-shadow:0 30px 70px rgba(0,0,0,.65); }
+.album-meta { font-family:var(--head); font-weight:300; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:26px; }
+.spotify-embed { display:block; margin:0 0 26px; border-radius:12px; }
+.platforms { display:flex; gap:12px; flex-wrap:wrap; }
+.platforms a { font-family:var(--head); font-weight:300; font-size:13px; letter-spacing:2px; text-transform:uppercase; border:1px solid var(--line); padding:11px 20px; color:var(--bone); transition:all .2s; }
+.platforms a:hover { border-color:var(--ember); color:var(--ember); text-decoration:none; }
+
+/* ---------- VIDEO — full-bleed ---------- */
+.video-sec { padding:0; border:0; }
+.video-box { position:relative; aspect-ratio:16/9; max-height:82vh; width:100%; background:#000; cursor:pointer; overflow:hidden; }
+.video-box .thumb { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.75; transition:opacity .25s, transform 6s ease; }
+.video-box:hover .thumb { opacity:.9; transform:scale(1.02); }
+.video-box iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-play { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+.video-play .ring { width:92px; height:92px; border:2px solid var(--bone); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.video-box:hover .ring { background:var(--ember); border-color:var(--ember); }
+.video-play .ring::after { content:""; border-style:solid; border-width:15px 0 15px 26px; border-color:transparent transparent transparent var(--bone); margin-left:7px; }
+.video-play .vt { font-family:var(--head); font-weight:300; letter-spacing:4px; font-size:14px; text-transform:uppercase; text-shadow:0 2px 12px rgba(0,0,0,.8); }
+.video-play .vt b { font-weight:700; font-size:22px; letter-spacing:2px; display:block; text-align:center; margin-bottom:4px; }
+
+/* ---------- OVER ONS — foto naast tekst ---------- */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.split .photo img { width:100%; height:100%; object-fit:cover; }
+.credit { font-family:var(--head); font-weight:300; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-top:10px; }
+.stats { display:flex; gap:0; border:1px solid var(--line); margin-top:40px; }
+.stat { flex:1; padding:20px 8px; text-align:center; }
+.stat + .stat { border-left:1px solid var(--line); }
+.stat b { display:block; font-family:var(--head); font-weight:700; font-size:32px; color:var(--ember); line-height:1; }
+.stat span { font-family:var(--head); font-weight:300; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+
+/* ---------- BAND — foto boven, namen eronder ---------- */
+.band-photo { position:relative; }
+.band-photo img { width:100%; max-height:70vh; object-fit:cover; object-position:center 25%; }
+.members { display:grid; grid-template-columns:repeat(6,1fr); border:1px solid var(--line); border-top:0; }
+.member { padding:20px 16px; }
+.member + .member { border-left:1px solid var(--line); }
+.member .name { font-family:var(--head); font-weight:500; font-size:15px; text-transform:uppercase; letter-spacing:1px; line-height:1.25; }
+.member .role { font-size:12.5px; color:var(--dim); margin-top:3px; }
+
+/* ---------- DISCOGRAFIE — coverhoezen ---------- */
+.disco { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
+.disco a { color:var(--bone); }
+.disco a:hover { text-decoration:none; }
+.disco .art { overflow:hidden; background:#000; }
+.disco .art img { width:100%; aspect-ratio:1/1; object-fit:cover; transition:transform .35s ease, opacity .25s; }
+.disco a:hover .art img { transform:scale(1.05); opacity:.85; }
+.disco .yr { font-family:var(--head); font-weight:300; font-size:12px; letter-spacing:2px; color:var(--ember); margin-top:12px; }
+.disco .ttl { font-family:var(--head); font-weight:500; font-size:15px; text-transform:uppercase; letter-spacing:1px; line-height:1.25; margin-top:2px; transition:color .2s; }
+.disco a:hover .ttl { color:var(--ember); }
+
+/* ---------- PERS ---------- */
+.press { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+.quote { background:var(--ink); padding:34px 30px; display:flex; flex-direction:column; gap:14px; }
+.quote .src { font-family:var(--head); font-weight:500; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--ember); }
+.quote blockquote { font-size:18px; line-height:1.55; font-style:italic; }
+.quote a { font-family:var(--head); font-weight:300; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-top:auto; }
+
+/* ---------- FOOTER ---------- */
+footer { border-top:1px solid var(--line); padding:44px 0 56px; }
+.foot { display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+.foot img { height:40px; }
+.foot p { font-family:var(--head); font-weight:300; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+
+/* ---------- REVEAL ---------- */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px) {
+  .album-grid, .split { grid-template-columns:1fr; gap:44px; }
+  .members { grid-template-columns:repeat(3,1fr); }
+  .member:nth-child(4) { border-left:0; }
+  .member:nth-child(n+4) { border-top:1px solid var(--line); }
+  .press { grid-template-columns:1fr; }
+  .disco { grid-template-columns:repeat(3,1fr); }
+  .navlinks { display:none; position:absolute; top:72px; left:0; right:0; background:rgba(13,13,13,.97); flex-direction:column; gap:0; padding:8px 28px 20px; border-bottom:1px solid var(--line); }
+  .navlinks.open { display:flex; }
+  .navlinks a { padding:12px 0; }
+  .navtoggle { display:block; }
+  .nav-cta { display:none; }
+}
+@media (max-width:560px) {
+  .members { grid-template-columns:1fr 1fr; }
+  .member { border-left:0 !important; }
+  .member:nth-child(even) { border-left:1px solid var(--line) !important; }
+  .member:nth-child(n+3) { border-top:1px solid var(--line); }
+  .stats { flex-wrap:wrap; }
+  .stat { flex-basis:50%; }
+  .stat:nth-child(3) { border-left:0; }
+  .stat:nth-child(n+3) { border-top:1px solid var(--line); }
+  .disco { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navbar">
+    <a class="brand" href="#top" aria-label="The Aurora Project"><img src="huisstijl-assets/sun_bone.png" alt="The Aurora Project"></a>
+    <button class="navtoggle" id="navtoggle">Menu</button>
+    <div class="navlinks" id="navlinks">
+      <a href="#album">Album</a>
+      <a href="#video">Video</a>
+      <a href="#over">About</a>
+      <a href="#band">Band</a>
+      <a href="#muziek">Music</a>
+      <a href="#pers">Press</a>
+    </div>
+    <div class="navsocial">
+      <a href="https://www.instagram.com/theauroraproject_band/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 2c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.7.3-.4.2-.6.3-.9.6-.3.3-.5.5-.6.9-.1.2-.2.6-.3 1.7-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.7.2.4.3.6.6.9.3.3.5.5.9.6.2.1.6.2 1.7.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.7-.3.4-.2.6-.3.9-.6.3-.3.5-.5.6-.9.1-.2.2-.6.3-1.7.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.7-.2-.4-.3-.6-.6-.9-.3-.3-.5-.5-.9-.6-.2-.1-.6-.2-1.7-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 7.2a2.9 2.9 0 1 0 0-5.7 2.9 2.9 0 0 0 0 5.7zm5.6-7.4a1 1 0 1 1-2.1 0 1 1 0 0 1 2.1 0z"/></svg></a>
+      <a href="https://www.facebook.com/theauroraproject" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+      <a href="https://www.youtube.com/@TheAuroraProject" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12c0 2 .2 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.3-1.9.5-3.8.5-5.8s-.2-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg></a>
+      <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.5 17.3c-.2.4-.7.5-1 .3-2.9-1.8-6.5-2.2-10.7-1.2-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1.1 8.6-.6 11.8 1.4.3.2.4.7.2 1zm1.5-3.3c-.3.4-.8.6-1.3.3-3.3-2-8.3-2.6-12.2-1.4-.5.1-1-.1-1.1-.6-.1-.5.1-1 .6-1.1 4.5-1.4 10-.7 13.8 1.6.4.2.5.8.2 1.2zm.1-3.4C15.2 8.3 8.7 8 4.9 9.2c-.6.2-1.2-.2-1.3-.7-.2-.6.2-1.2.7-1.3 4.4-1.3 11.5-1.1 16 1.6.5.3.7 1 .4 1.5-.3.4-1 .6-1.6.3z"/></svg></a>
+      <a href="https://theauroraprojectnl.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M0 18.75l7.44-13.5H24l-7.44 13.5H0z"/></svg></a>
+    </div>
+    <a class="nav-cta" href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Listen to EVOS12</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-logoshade"></div>
+  <div class="hero-inner">
+    <img class="hero-logo" src="huisstijl-assets/logo_bone.png" alt="The Aurora Project">
+    <div class="hero-kicker">The new album &middot; out now</div>
+    <h1 class="hero-title">EVOS12</h1>
+    <p class="hero-sub">Part one of a two-part story. On CD and all digital platforms via FREIA Music.</p>
+    <div class="cta-row">
+      <a class="btn ember" href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Listen now</a>
+      <a class="btn" href="#video">Watch the video</a>
+    </div>
+  </div>
+  <div class="hero-credit">Photo: Bert Treep</div>
+</header>
+
+<div class="aurora-line"></div>
+
+<!-- ============ ALBUM ============ -->
+<section id="album">
+  <div class="wrap">
+    <div class="album-grid">
+      <div class="reveal">
+        <img class="cover" src="site-assets/cover.jpg" alt="EVOS12 albumcover">
+      </div>
+      <div class="reveal">
+        <div class="kicker">Fifth studio album</div>
+        <h2>EVOS12</h2>
+        <div class="album-meta">21 February 2025 &middot; FREIA Music &middot; 38:58</div>
+        <iframe class="spotify-embed" src="https://open.spotify.com/embed/album/5BluzKJW1G2D4Moukipcdt?utm_source=generator&amp;theme=0" width="100%" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="EVOS12 on Spotify"></iframe>
+        <div class="platforms">
+          <a href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener">Bandcamp</a>
+          <a href="https://music.apple.com/us/artist/the-aurora-project/311309911" target="_blank" rel="noopener">Apple Music</a>
+          <a href="https://www.discogs.com/release/33285273-The-Aurora-Project-EVOS12" target="_blank" rel="noopener">Discogs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO — full-bleed ============ -->
+<section class="video-sec" id="video">
+  <div class="video-box" id="videobox" data-id="GhDH3aKxhG0">
+    <img class="thumb" src="https://i.ytimg.com/vi/GhDH3aKxhG0/maxresdefault.jpg" alt="Slave City — official music video" loading="lazy">
+    <div class="video-play">
+      <div class="ring"></div>
+      <div class="vt"><b>Slave City</b>Official music video</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OVER ONS ============ -->
+<section id="over">
+  <div class="wrap">
+    <div class="split">
+      <div class="photo reveal">
+        <img src="site-assets/about.jpg" alt="The Aurora Project — photo Bert Treep">
+        <div class="credit">Photo: Bert Treep</div>
+      </div>
+      <div class="reveal">
+        <div class="kicker">About the band</div>
+        <h2>Prog from Katwijk</h2>
+        <p class="lead">The Aurora Project was founded in 1998 by a group of friends who met through their shared love of Magic: The Gathering and progressive rock &amp; metal. Inspired by Rush, Pink Floyd and The Gathering, the band builds expansive concept albums through intensive jam sessions.</p>
+        <p class="lead" style="margin-top:16px;">After the sudden passing of guitarist and lyricist Marc Vooijs in 2014, the band wove his ideas and lyrics into <em>World of Grey</em>. Now they return with <em>EVOS12</em>: part one of an ambitious two-part concept.</p>
+        <div class="stats">
+          <div class="stat"><b>26</b><span>Years active</span></div>
+          <div class="stat"><b>5</b><span>Albums</span></div>
+          <div class="stat"><b>6</b><span>Members</span></div>
+          <div class="stat"><b>2</b><span>EVOS parts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BAND ============ -->
+<section id="band" style="padding-bottom:0;">
+  <div class="wrap" style="margin-bottom:44px;">
+    <div class="kicker">Line-up</div>
+    <h2 style="margin-bottom:0;">The band</h2>
+  </div>
+  <div class="wrap">
+    <div class="band-photo reveal">
+      <img src="site-assets/band.jpg" alt="The Aurora Project — photo Bert Treep">
+    </div>
+    <div class="members reveal">
+      <div class="member"><div class="name">Alex Ouwehand</div><div class="role">Guitar &middot; vocals</div></div>
+      <div class="member"><div class="name">Rob Krijgsman</div><div class="role">Bass</div></div>
+      <div class="member"><div class="name">Marcel &lsquo;Mox&rsquo; Guijt</div><div class="role">Keyboards</div></div>
+      <div class="member"><div class="name">Remco van den Berg</div><div class="role">Guitar &middot; vocals</div></div>
+      <div class="member"><div class="name">Dennis Binnekade</div><div class="role">Lead vocals</div></div>
+      <div class="member"><div class="name">Joris Bol</div><div class="role">Drums</div></div>
+    </div>
+    <p class="lead" style="margin:30px 0 110px;">Known for dynamic live sets &mdash; with appearances at ProgPower Europe and shared stages with Riverside and Threshold. Photo: Bert Treep.</p>
+  </div>
+</section>
+
+<!-- ============ DISCOGRAFIE ============ -->
+<section id="muziek">
+  <div class="wrap">
+    <div class="kicker">Discography</div>
+    <h2>Five chapters</h2>
+    <div class="disco reveal">
+      <a href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank" rel="noopener"><span class="art"><img src="site-assets/cover.jpg" alt="EVOS12" loading="lazy"></span><span class="yr">2025</span><div class="ttl">EVOS12</div></a>
+      <a href="https://theauroraprojectnl.bandcamp.com/album/world-of-grey" target="_blank" rel="noopener"><span class="art"><img src="site-assets/alb-worldofgrey.jpg" alt="World of Grey" loading="lazy"></span><span class="yr">2016</span><div class="ttl">World of Grey</div></a>
+      <a href="https://theauroraprojectnl.bandcamp.com/album/selling-the-aggression" target="_blank" rel="noopener"><span class="art"><img src="site-assets/alb-selling.jpg" alt="Selling the Aggression" loading="lazy"></span><span class="yr">2013</span><div class="ttl">Selling the Aggression</div></a>
+      <a href="https://theauroraprojectnl.bandcamp.com/album/shadow-border" target="_blank" rel="noopener"><span class="art"><img src="site-assets/alb-shadow.jpg" alt="Shadow Border" loading="lazy"></span><span class="yr">2009</span><div class="ttl">Shadow Border</div></a>
+      <a href="https://theauroraprojectnl.bandcamp.com/album/unspoken-words" target="_blank" rel="noopener"><span class="art"><img src="site-assets/alb-unspoken.jpg" alt="Unspoken Words" loading="lazy"></span><span class="yr">2005</span><div class="ttl">Unspoken Words</div></a>
+    </div>
+    <p class="lead" style="margin-top:26px;">Rather watch? The full <a href="https://www.youtube.com/watch?v=wQ_ojP8sOXY" target="_blank" rel="noopener">25 Years Live show</a> is on YouTube.</p>
+  </div>
+</section>
+
+<!-- ============ PERS ============ -->
+<section id="pers">
+  <div class="wrap">
+    <div class="kicker">What the press says</div>
+    <h2>Reviews</h2>
+    <div class="press reveal">
+      <div class="quote">
+        <div class="src">Prog Radio &middot; 4.5 / 5 ★</div>
+        <blockquote>&ldquo;EVOS12 drips with quality and is very much recommended for you to explore further.&rdquo;</blockquote>
+        <a href="https://www.progradio.com/reviews/evos12" target="_blank" rel="noopener">Read review</a>
+      </div>
+      <div class="quote">
+        <div class="src">ProgArchives</div>
+        <blockquote>&ldquo;&lsquo;Have Some Tea&rsquo; slides right into the best epics of 2025 list &mdash; Robin Trower wah-wah guitar meets Floydian psychedelia.&rdquo;</blockquote>
+        <a href="https://www.progarchives.com/album.asp?id=87951" target="_blank" rel="noopener">Read review</a>
+      </div>
+      <div class="quote">
+        <div class="src">Background Magazine</div>
+        <blockquote>&ldquo;More than excellent, with great musical variety and depth.&rdquo; <span style="font-style:normal; font-size:13px; color:var(--dim);">(translated from Dutch)</span></blockquote>
+        <a href="https://www.backgroundmagazine.nl/CDreviews/TheAuroraProjectEvos12.html" target="_blank" rel="noopener">Read review</a>
+      </div>
+      <div class="quote">
+        <div class="src">Ever Metal &middot; Interview</div>
+        <blockquote>&ldquo;A progressive rock band from the Netherlands that have been playing together for almost 25 years.&rdquo;</blockquote>
+        <a href="https://www.ever-metal.com/2025/02/20/emqs-with-the-aurora-project/" target="_blank" rel="noopener">Read interview</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="aurora-line"></div>
+
+<footer>
+  <div class="wrap foot">
+    <img src="huisstijl-assets/logo_bone.png" alt="The Aurora Project">
+    <p>&copy; 2026 The Aurora Project &middot; FREIA Music &middot; Katwijk, NL</p>
+  </div>
+</footer>
+
+<script>
+// mobile menu
+const links = document.getElementById('navlinks');
+document.getElementById('navtoggle').addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+// scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// click-to-load YouTube embed
+const vb = document.getElementById('videobox');
+vb.addEventListener('click', () => {
+  if (vb.querySelector('iframe')) return;
+  const f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + vb.dataset.id + '?autoplay=1';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture';
+  f.allowFullscreen = true;
+  vb.appendChild(f);
+});
+</script>
+</body>
+</html>

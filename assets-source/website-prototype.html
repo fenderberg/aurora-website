@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Aurora Project</title>
+<style>
+:root {
+  --accent: #00ff9d;
+  --bg: #000000;
+  --bg2: #080808;
+  --bg3: #101010;
+  --text: #f0f0f0;
+  --muted: #666;
+  --border: rgba(255,255,255,0.07);
+  --font-head: 'Courier New', monospace;
+  --font-body: 'Trebuchet MS', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── GLOBAL DOT TEXTURE ── */
+.dot-texture {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.dot-texture-faint {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 3rem;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo img {
+  height: 36px;
+  opacity: 0.9;
+  filter: brightness(0) invert(1);
+}
+.nav-logo-fallback {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  display: none;
+}
+nav ul { list-style: none; display: flex; gap: 2.5rem; }
+nav ul a {
+  color: var(--muted); font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; text-decoration: none; font-family: var(--font-head);
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 7rem 3rem 4rem;
+}
+
+/* Subtle dot grid background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+/* Vignette to fade dots toward center */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 70% 50%, transparent 20%, var(--bg) 75%);
+  pointer-events: none;
+}
+
+.hero-canvas-wrap {
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 60vw; max-width: 780px;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+#halftoneCanvas {
+  width: 100%; height: 100%;
+  opacity: 0.6;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 640px;
+}
+
+.hero-logo {
+  margin-bottom: 2.5rem;
+}
+.hero-logo img {
+  height: 80px;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+.hero-logo-text {
+  font-family: var(--font-head);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 1px; background: var(--accent);
+}
+
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.25rem;
+  font-weight: bold;
+}
+.accent-word { color: var(--accent); }
+
+.hero-desc {
+  font-size: 0.9rem; color: var(--muted);
+  margin-bottom: 2.5rem; max-width: 420px; line-height: 1.75;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block; padding: 0.7rem 1.8rem;
+  font-family: var(--font-head);
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--accent); color: #000; font-weight: bold;
+}
+.btn-primary:hover { filter: brightness(0.85); }
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── DIVIDER ── */
+hr.divider { border: none; height: 1px; background: var(--border); }
+
+/* ── SECTIONS ── */
+section { padding: 5.5rem 3rem; }
+.section-eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.section-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0;
+}
+h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  line-height: 1.05; margin-bottom: 2.5rem;
+  font-weight: bold;
+}
+.inner { max-width: 1100px; }
+
+/* ── ABOUT ── */
+.about { background: var(--bg2); position: relative; overflow: hidden; }
+.about-dot-bg {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0,255,157,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; position: relative; }
+.about p { color: var(--muted); line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 2.5rem; background: var(--border); border: 1px solid var(--border); }
+.stat-box {
+  background: var(--bg2); padding: 1.25rem 1rem;
+  border-left: 2px solid var(--accent);
+}
+.stat-num {
+  font-family: var(--font-head); font-size: 2.2rem; color: var(--accent); line-height: 1;
+}
+.stat-label { font-family: var(--font-head); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+/* band photo area with halftone overlay */
+.about-photo {
+  position: relative;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-photo-overlay {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0,255,157,0.09) 1px, transparent 1px);
+  background-size: 12px 12px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.about-photo-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 0.7rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ── ALBUM ── */
+.album { background: var(--bg); position: relative; overflow: hidden; }
+.album::before {
+  content: '';
+  position: absolute; right: -10%; top: 50%; transform: translateY(-50%);
+  width: 600px; height: 600px;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 18px 18px;
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
+  mask-image: radial-gradient(circle, black 30%, transparent 70%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.album-block { display: grid; grid-template-columns: auto 1fr; gap: 3.5rem; align-items: start; }
+.album-cover {
+  width: 260px; flex-shrink: 0;
+  border: 1px solid var(--border);
+  aspect-ratio: 1; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.album-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.album-cover-fallback {
+  font-family: var(--font-head); font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); text-align: center; padding: 1rem;
+}
+.album-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase; line-height: 1; margin-bottom: 0.4rem;
+  font-weight: bold; letter-spacing: 0.06em;
+}
+.album-info {
+  font-family: var(--font-head);
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 2rem;
+}
+.tracklist { list-style: none; margin-bottom: 2rem; }
+.tracklist li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+  font-family: var(--font-head); font-size: 0.85rem;
+  transition: color 0.15s;
+}
+.tracklist li:hover { color: var(--accent); }
+.track-num { color: var(--accent); font-size: 0.7rem; width: 28px; flex-shrink: 0; }
+.track-name { flex: 1; padding: 0 1rem; }
+.track-time { color: var(--muted); font-size: 0.75rem; }
+.stream-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.stream-btn {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--border); font-family: var(--font-head);
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: all 0.2s;
+}
+.stream-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── MEMBERS ── */
+.members { background: var(--bg2); position: relative; overflow: hidden; }
+.members-dot-bg {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+.members-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  position: relative;
+}
+.member-card {
+  background: var(--bg2); padding: 1.75rem 1.5rem;
+  position: relative; overflow: hidden;
+  transition: background 0.2s;
+}
+.member-card:hover { background: var(--bg3); }
+.member-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.member-card:hover::after { transform: scaleX(1); }
+.member-index {
+  font-family: var(--font-head); font-size: 0.6rem; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 0.6rem;
+}
+.member-name { font-family: var(--font-head); font-size: 1rem; text-transform: uppercase; margin-bottom: 0.3rem; letter-spacing: 0.05em; font-weight: bold; }
+.member-role { font-family: var(--font-head); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* ── PRESS ── */
+.press { background: var(--bg); }
+.press-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.press-card {
+  background: var(--bg); padding: 2rem 1.75rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: background 0.2s;
+}
+.press-card:hover { background: var(--bg2); }
+.press-source { font-family: var(--font-head); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.press-quote { font-size: 0.95rem; color: var(--text); line-height: 1.7; font-style: italic; flex: 1; }
+.press-link { font-family: var(--font-head); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+.press-link:hover { color: var(--accent); }
+
+/* ── CONNECT ── */
+.connect {
+  background: var(--bg2); text-align: center;
+  position: relative; overflow: hidden;
+}
+.connect-dot-bg {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0,255,157,0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+.connect h2 { position: relative; }
+.connect p { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.9rem; position: relative; }
+.social-links { display: flex; gap: 1px; justify-content: center; flex-wrap: wrap; position: relative; }
+.social-link {
+  padding: 0.65rem 1.6rem;
+  border: 1px solid var(--border);
+  font-family: var(--font-head);
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: all 0.2s;
+}
+.social-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,255,157,0.05); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 1.75rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo img { height: 24px; filter: brightness(0) invert(1); opacity: 0.4; }
+.footer-logo-text { font-family: var(--font-head); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: none; }
+.footer-copy { font-family: var(--font-head); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* ── STYLE EDITOR ── */
+.editor {
+  position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+  background: rgba(8,8,8,0.97);
+  border: 1px solid rgba(0,255,157,0.2);
+  border-right: none;
+  padding: 1.1rem 1rem;
+  z-index: 200;
+  width: 210px;
+  border-radius: 3px 0 0 3px;
+  transition: transform 0.3s;
+}
+.editor.collapsed { transform: translateY(-50%) translateX(175px); }
+.editor-toggle {
+  position: absolute; left: -30px; top: 50%; transform: translateY(-50%);
+  background: rgba(8,8,8,0.97); border: 1px solid rgba(0,255,157,0.2); border-right: none;
+  width: 30px; height: 70px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.58rem; color: var(--accent);
+  writing-mode: vertical-rl; letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: var(--font-head); border-radius: 3px 0 0 3px;
+}
+.editor h3 {
+  font-family: var(--font-head); font-size: 0.6rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,255,157,0.15);
+}
+.editor label {
+  font-family: var(--font-head); font-size: 0.58rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #555; display: block;
+  margin-bottom: 0.25rem; margin-top: 0.85rem;
+}
+.editor input[type=color] {
+  width: 100%; height: 30px; border: 1px solid rgba(255,255,255,0.1);
+  background: none; cursor: pointer; padding: 2px;
+}
+.editor select {
+  width: 100%; background: #111; color: #ccc;
+  border: 1px solid rgba(255,255,255,0.1); padding: 0.35rem;
+  font-size: 0.72rem; cursor: pointer;
+}
+.editor-actions { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(0,255,157,0.1); }
+.editor-btn {
+  padding: 0.45rem; background: transparent;
+  border: 1px solid rgba(0,255,157,0.25);
+  color: var(--accent); font-family: var(--font-head);
+  font-size: 0.58rem; letter-spacing: 0.15em;
+  text-transform: uppercase; cursor: pointer; text-align: center;
+  transition: background 0.2s;
+}
+.editor-btn:hover { background: rgba(0,255,157,0.08); }
+.copied { color: #fff !important; border-color: #fff !important; }
+</style>
+</head>
+<body>
+
+<!-- STYLE EDITOR -->
+<div class="editor" id="editor">
+  <div class="editor-toggle" onclick="toggleEditor()">Stijl</div>
+  <h3>// Editor</h3>
+
+  <label>Accentkleur</label>
+  <input type="color" value="#00ff9d" oninput="updateAccent(this.value)">
+
+  <label>Achtergrond</label>
+  <input type="color" value="#000000" oninput="updateBg(this.value)">
+
+  <label>Heading font</label>
+  <select onchange="setVar('--font-head', this.value)">
+    <option value="'Courier New', monospace">Courier New</option>
+    <option value="'Arial Black', sans-serif">Arial Black</option>
+    <option value="'Impact', sans-serif">Impact</option>
+    <option value="Georgia, serif">Georgia</option>
+    <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+  </select>
+
+  <label>Body font</label>
+  <select onchange="setVar('--font-body', this.value)">
+    <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+    <option value="Arial, sans-serif">Arial</option>
+    <option value="Georgia, serif">Georgia</option>
+    <option value="'Courier New', monospace">Courier New</option>
+  </select>
+
+  <div class="editor-actions">
+    <button class="editor-btn" id="copyBtn" onclick="copyCSS()">Kopieer :root CSS</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="TAP logo.png" alt="The Aurora Project"
+      onerror="this.style.display='none'; document.querySelector('.nav-logo-fallback').style.display='block'">
+    <span class="nav-logo-fallback">The Aurora Project</span>
+  </a>
+  <ul>
+    <li><a href="#about">Over ons</a></li>
+    <li><a href="#album">Album</a></li>
+    <li><a href="#band">Band</a></li>
+    <li><a href="#press">Pers</a></li>
+    <li><a href="#connect">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-canvas-wrap">
+    <canvas id="halftoneCanvas"></canvas>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-logo">
+      <img src="TAP logo.png" alt="The Aurora Project"
+        onerror="this.style.display='none'; document.querySelector('.hero-logo-text').style.display='block'">
+      <div class="hero-logo-text">The Aurora Project</div>
+    </div>
+    <div class="hero-eyebrow">Katwijk, NL &nbsp;·&nbsp; Est. 1998</div>
+    <h1>Progressive<br><span class="accent-word">Rock</span></h1>
+    <p class="hero-desc">Vijf conceptalbums. Zesentwintig jaar vriendschap. Eén nieuw verhaal dat net begonnen is.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank">Beluister EVOS12</a>
+      <a class="btn btn-outline" href="#album">Meer info</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-dot-bg"></div>
+  <div class="inner about-grid">
+    <div>
+      <div class="section-eyebrow">Over de band</div>
+      <h2>Prog uit<br>Katwijk</h2>
+      <p>The Aurora Project is opgericht in 1998 door een groep vrienden die samenkwamen via hun liefde voor Magic: The Gathering en progressive rock & metal. Geïnspireerd door Rush, Pink Floyd en The Gathering bouwen ze uitgebreide conceptalbums via intensieve jamsessies.</p>
+      <p>Na het plotselinge overlijden van gitarist en tekstschrijver Marc Vooijs in 2014 besloot de band zijn ideeën en teksten te verwerken in 'World of Grey'. Nu zijn ze terug met EVOS12, het eerste deel van een ambitieus tweedelig concept.</p>
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">26</div><div class="stat-label">Jaar actief</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Studioalbums</div></div>
+        <div class="stat-box"><div class="stat-num">6</div><div class="stat-label">Bandleden</div></div>
+        <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">EVOS-delen</div></div>
+      </div>
+    </div>
+    <div class="about-photo">
+      <img src="TAP 6 foto Bert Treep.JPG" alt="The Aurora Project"
+        onerror="this.style.display='none'">
+      <div class="about-photo-overlay"></div>
+      <div class="about-photo-fallback">Foto: Bert Treep</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ALBUM -->
+<section class="album" id="album">
+  <div class="inner album-block">
+    <div class="album-cover">
+      <img src="Album Cover EVOS12.jpg" alt="EVOS12"
+        onerror="this.style.display='none'">
+      <div class="album-cover-fallback">EVOS12<br>2025</div>
+    </div>
+    <div>
+      <div class="section-eyebrow">5e studioalbum</div>
+      <div class="album-title">EVOS12</div>
+      <div class="album-info">21 februari 2025 &nbsp;·&nbsp; FREIA Music &nbsp;·&nbsp; 38:58</div>
+      <ul class="tracklist">
+        <li><span class="track-num">01</span><span class="track-name">Slave City</span><span class="track-time">6:26</span></li>
+        <li><span class="track-num">02</span><span class="track-name">The Movement</span><span class="track-time">5:41</span></li>
+        <li><span class="track-num">03</span><span class="track-name">Have Some Tea</span><span class="track-time">11:36</span></li>
+        <li><span class="track-num">04</span><span class="track-name">The Traveller</span><span class="track-time">5:46</span></li>
+        <li><span class="track-num">05</span><span class="track-name">Freedom of Thought</span><span class="track-time">9:09</span></li>
+      </ul>
+      <div class="stream-links">
+        <a class="stream-btn" href="https://open.spotify.com/album/5BluzKJW1G2D4Moukipcdt" target="_blank">Spotify</a>
+        <a class="stream-btn" href="https://theauroraprojectnl.bandcamp.com/album/evos12" target="_blank">Bandcamp</a>
+        <a class="stream-btn" href="https://music.apple.com/us/artist/the-aurora-project/311309911" target="_blank">Apple Music</a>
+        <a class="stream-btn" href="https://www.discogs.com/release/33285273-The-Aurora-Project-EVOS12" target="_blank">Discogs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MEMBERS -->
+<section class="members" id="band">
+  <div class="members-dot-bg"></div>
+  <div class="inner" style="position:relative">
+    <div class="section-eyebrow">Bezetting</div>
+    <h2>De Band</h2>
+    <div class="members-grid">
+      <div class="member-card"><div class="member-index">// 01</div><div class="member-name">Dennis Binnekade</div><div class="member-role">Lead vocals</div></div>
+      <div class="member-card"><div class="member-index">// 02</div><div class="member-name">Remco van den Berg</div><div class="member-role">Guitar · Backing vocals</div></div>
+      <div class="member-card"><div class="member-index">// 03</div><div class="member-name">Alex Ouwehand</div><div class="member-role">Guitar · Backing vocals</div></div>
+      <div class="member-card"><div class="member-index">// 04</div><div class="member-name">Marcel 'Mox' Guijt</div><div class="member-role">Keyboards</div></div>
+      <div class="member-card"><div class="member-index">// 05</div><div class="member-name">Rob Krijgsman</div><div class="member-role">Bass</div></div>
+      <div class="member-card"><div class="member-index">// 06</div><div class="member-name">Joris Bol</div><div class="member-role">Drums · Percussion</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRESS -->
+<section class="press" id="press">
+  <div class="inner">
+    <div class="section-eyebrow">Wat de pers zegt</div>
+    <h2>Reviews</h2>
+    <div class="press-grid">
+      <div class="press-card">
+        <div class="press-source">Prog Radio &nbsp;·&nbsp; 4.5 / 5 ★</div>
+        <div class="press-quote">"EVOS12 drips with quality and is very much recommended for you to explore further."</div>
+        <a class="press-link" href="https://www.progradio.com/reviews/evos12" target="_blank">Lees recensie →</a>
+      </div>
+      <div class="press-card">
+        <div class="press-source">ProgArchives</div>
+        <div class="press-quote">"'Have Some Tea' slides right into the best epics of 2025 list — Robin Trower wah-wah guitar meets Floydian psychedelia."</div>
+        <a class="press-link" href="https://www.progarchives.com/album.asp?id=87951" target="_blank">Lees recensie →</a>
+      </div>
+      <div class="press-card">
+        <div class="press-source">Background Magazine</div>
+        <div class="press-quote">"Meer dan uitstekend, met veel muzikale variatie en diepgang."</div>
+        <a class="press-link" href="https://www.backgroundmagazine.nl/CDreviews/TheAuroraProjectEvos12.html" target="_blank">Lees recensie →</a>
+      </div>
+      <div class="press-card">
+        <div class="press-source">Ever Metal &nbsp;·&nbsp; Interview</div>
+        <div class="press-quote">"A progressive rock band from the Netherlands that have been playing together for almost 25 years."</div>
+        <a class="press-link" href="https://www.ever-metal.com/2025/02/20/emqs-with-the-aurora-project/" target="_blank">Lees interview →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONNECT -->
+<section class="connect" id="connect">
+  <div class="connect-dot-bg"></div>
+  <div class="inner" style="position:relative">
+    <div class="section-eyebrow" style="justify-content:center">Volg de band</div>
+    <h2>Stay Connected</h2>
+    <p>Nieuws, podcasts en meer via onze sociale kanalen.</p>
+    <div class="social-links">
+      <a class="social-link" href="https://www.facebook.com/theauroraproject" target="_blank">Facebook</a>
+      <a class="social-link" href="https://www.instagram.com/theauroraproject_band/" target="_blank">Instagram</a>
+      <a class="social-link" href="https://www.youtube.com/@TheAuroraProject" target="_blank">YouTube</a>
+      <a class="social-link" href="https://theauroraprojectnl.bandcamp.com/" target="_blank">Bandcamp</a>
+      <a class="social-link" href="https://www.theauroraproject.com" target="_blank">Website</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="TAP logo.png" alt="The Aurora Project"
+      onerror="this.style.display='none'; document.querySelector('.footer-logo-text').style.display='block'">
+    <span class="footer-logo-text">The Aurora Project</span>
+  </div>
+  <div class="footer-copy">© 2025 The Aurora Project &nbsp;·&nbsp; FREIA Music &nbsp;·&nbsp; Katwijk, NL</div>
+</footer>
+
+<script>
+/* ── HALFTONE SPHERE (canvas, inspired by EVOS12 cover) ── */
+function drawHalftone() {
+  const canvas = document.getElementById('halftoneCanvas');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const cx = w * 0.5, cy = h * 0.5;
+  const R = Math.min(w, h) * 0.46;
+  const spacing = 18;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00ff9d';
+
+  ctx.clearRect(0, 0, w, h);
+
+  for (let y = cy - R - spacing; y <= cy + R + spacing; y += spacing) {
+    for (let x = cx - R - spacing; x <= cx + R + spacing; x += spacing) {
+      const dx = x - cx, dy = y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > R) continue;
+
+      // Normalized distance 0=center, 1=edge
+      const t = dist / R;
+      // dot size: largest at edge, smallest near glowing center
+      const maxR = spacing * 0.38;
+      const minR = spacing * 0.04;
+      // Bright glow region near center
+      const dotR = minR + (maxR - minR) * Math.pow(t, 0.7);
+
+      // Opacity: bright center fades in from transparent, edges full
+      const alpha = 0.15 + 0.85 * Math.pow(t, 0.5);
+
+      ctx.beginPath();
+      ctx.arc(x, y, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
+      ctx.fill();
+    }
+  }
+}
+
+window.addEventListener('load', drawHalftone);
+window.addEventListener('resize', drawHalftone);
+
+/* ── STYLE EDITOR ── */
+function setVar(prop, val) {
+  document.documentElement.style.setProperty(prop, val);
+}
+
+function updateAccent(val) {
+  setVar('--accent', val);
+  // Redraw halftone with new accent
+  drawHalftone();
+  // Update dot texture colors
+  document.querySelectorAll('.about-dot-bg, .connect-dot-bg').forEach(el => {
+    el.style.backgroundImage = `radial-gradient(circle, ${hexToRgba(val, 0.07)} 1px, transparent 1px)`;
+  });
+  document.querySelectorAll('.about-photo-overlay').forEach(el => {
+    el.style.backgroundImage = `radial-gradient(circle, ${hexToRgba(val, 0.09)} 1px, transparent 1px)`;
+  });
+}
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function updateBg(val) {
+  const r = parseInt(val.slice(1,3),16);
+  const g = parseInt(val.slice(3,5),16);
+  const b = parseInt(val.slice(5,7),16);
+  setVar('--bg', val);
+  setVar('--bg2', `rgb(${Math.min(r+8,255)},${Math.min(g+8,255)},${Math.min(b+8,255)})`);
+  setVar('--bg3', `rgb(${Math.min(r+16,255)},${Math.min(g+16,255)},${Math.min(b+16,255)})`);
+}
+
+function toggleEditor() {
+  document.getElementById('editor').classList.toggle('collapsed');
+}
+
+function copyCSS() {
+  const s = getComputedStyle(document.documentElement);
+  const css = `:root {\n  --accent: ${s.getPropertyValue('--accent').trim()};\n  --bg: ${s.getPropertyValue('--bg').trim()};\n  --font-head: ${s.getPropertyValue('--font-head').trim()};\n  --font-body: ${s.getPropertyValue('--font-body').trim()};\n}`;
+  navigator.clipboard.writeText(css).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Gekopieerd!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Kopieer :root CSS'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
